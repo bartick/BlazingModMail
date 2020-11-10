@@ -4,7 +4,6 @@ import asyncio
 from dotenv import load_dotenv
 from discord import *
 from discord.ext import commands
-
 from run import client
 
 load_dotenv()
