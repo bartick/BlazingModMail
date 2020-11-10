@@ -48,8 +48,16 @@ class ModMail(commands.Cog):
 	@commands.has_permissions(manage_channels=True)
 	async def close(self, ctx, channel: TextChannel = None, *, reason=None):
 		channel = channel or ctx.channel
-		del_mail(channel.id)
-		await channel.delete(reason=reason)
+		with open('mail.json', 'r') as f:
+			mail = json.load(f)
+		mod_channel = channel.id in json
+		if mod_channel: 
+			del_mail(channel.id)
+			await channel.delete(reason=reason)
+		else:
+			temp = await ctx.send(f"{ctx.author.mention} This Channel is not a mod mail connected channel. Please try this command in a mod mail connected channel.")
+			await asyncio.sleep(5)
+			await temp.delete()
 
 	@close.error
 	async def close_error(self, ctx, error):
