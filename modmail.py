@@ -32,7 +32,7 @@ async def create_channel(author):
 	guild.me: PermissionOverwrite(read_messages=True),
 	role: PermissionOverwrite(read_messages=True)
 	}
-	chn = await guild.create_text_channel(name=author.name, overwrites=overwrites, category=client.get_channel(int(os.getenv('CATEGORY_ID'))))
+	chn = await guild.create_text_channel(name=f"📬〢{author.name}", overwrites=overwrites, category=client.get_channel(int(os.getenv('CATEGORY_ID'))))
 	add_mail(author.id, chn.id)
 	member = await guild.fetch_member(author.id)
 	await chn.send("@here Someone wants help.")
