@@ -59,7 +59,7 @@ class ModMail(commands.Cog):
 		else:
 			message = await ctx.send(f"{ctx.author.mention} Something Went wrong! Make Sure that I have correct permission and you are running this command in the correct channel.")
 
-		await asyncio.sleep(3)
+		await asyncio.sleep(5)
 		await message.delete()
 
 	@commands.command(aliases=['r','reply'])
@@ -80,7 +80,7 @@ class ModMail(commands.Cog):
 		overwrites.read_messages = True
 		await ctx.channel.set_permissions(member, overwrite=overwrites)
 		del_msg = await ctx.send(f"Added {member.name} to this channel")
-		await asyncio.sleep(3)
+		await asyncio.sleep(5)
 		await msg.delete()
 
 	@add_member.error
@@ -92,7 +92,7 @@ class ModMail(commands.Cog):
 		else:
 			msg = await ctx.send(f"{ctx.author.mention} Something went wrong. Please try again with correct details and permission.")
 
-		await asyncio.sleep(3)
+		await asyncio.sleep(5)
 		await msg.delete()
 
 	@commands.command(aliases=['remove','rm'])
@@ -103,7 +103,7 @@ class ModMail(commands.Cog):
 		overwrite.read_messages = False
 		await ctx.channel.set_permissions(member, overwrite=overwrite)
 		del_msg = await ctx.send(f"Removed {member.name} to this channel")
-		await asyncio.sleep(3)
+		await asyncio.sleep(5)
 		await msg.delete()
 
 	@remove_member.error
@@ -115,7 +115,7 @@ class ModMail(commands.Cog):
 		else:
 			msg = await ctx.send(f"{ctx.author.mention} Something went wrong. Please try again with correct details and permission.")
 
-		await asyncio.sleep(3)
+		await asyncio.sleep(5)
 		await msg.delete()
 
 	@commands.Cog.listener()
