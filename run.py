@@ -13,14 +13,15 @@ def get_prefix(client, message):
 
         return prefixes[str(message.guild.id)]
     except Exception:
-        return "c."
+        return "b."
 
 
 client = commands.Bot(command_prefix=get_prefix,case_insensitive=True)
 client.remove_command('help')
 
-status = cycle(['c.help to get the number of commands available', 'Originally I was developed by Bartick',
-                'My developers username with tag is Bartick2003#8063', 'Don\'t try to mess with my code'])
+status = cycle(['My Prefix is b.', 'Originally I was developed by Bartick',
+                'My developers username with tag is Bartick2003#8063', 'Don\'t try to mess with my code',
+                'DM me for help | I am only related to Blazing Warriors Server'])
 
 
 @client.event
