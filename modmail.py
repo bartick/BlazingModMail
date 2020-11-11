@@ -35,7 +35,7 @@ async def create_channel(author):
 	add_mail(author.id, chn.id)
 	member = await guild.fetch_member(author.id)
 	await chn.send("@here Someone wants help.")
-	await chn.send(f"**Username:** {author.name}#{author.discriminator} \n**Account Created:** {author.created_at}\n**Joined on:** {member.joined_at}")
+	await chn.send(f"**Username:** {author.name}#{author.discriminator} \n**Account Created:** {author.created_at}\n**Joined on:** {member.joined_at}\n**User Id:** {author.id}")
 	await chn.send("---------------------------------")
 	return chn
 
@@ -87,11 +87,12 @@ class ModMail(commands.Cog):
 
 	@commands.command(aliases=['a','add'])
 	@commands.has_permissions(manage_channels=True)
-	async def add_member(self,ctx, user: User):
+	async def add_member(self,ctx, user: int):
+		member = await ctx.guild.fetch_member(user)
 		overwrites =  PermissionOverwrite()
 		overwrites.read_messages = True
-		await ctx.channel.set_permissions(user, overwrite=overwrites)
-		del_msg = await ctx.send(f"Added {user.mention} to this channel")
+		await ctx.channel.set_permissions(member, overwrite=overwrites)
+		del_msg = await ctx.send(f"Added {member.name} to this channel")
 		await asyncio.sleep(5)
 		await msg.delete()
 
@@ -109,7 +110,8 @@ class ModMail(commands.Cog):
 
 	@commands.command(aliases=['remove','rm'])
 	@commands.has_permissions(manage_channels=True)
-	async def remove_member(self,ctx, member: User):
+	async def remove_member(self,ctx, user: int):
+		member = await ctx.guild.fetch_member(user)
 		overwrite = PermissionOverwrite()
 		overwrite.read_messages = False
 		await ctx.channel.set_permissions(member, overwrite=overwrite)
