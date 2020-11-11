@@ -30,7 +30,7 @@ async def on_ready():
     print('Bot is ready')
 
 
-@tasks.loop(seconds=10)
+@tasks.loop(seconds=20)
 async def change_status():
     await client.change_presence(activity=discord.Game(next(status)))
 
