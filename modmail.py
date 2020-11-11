@@ -91,7 +91,7 @@ class ModMail(commands.Cog):
 		overwrites =  PermissionOverwrite()
 		overwrites.read_messages = True
 		await ctx.channel.set_permissions(member, overwrite=overwrites)
-		del_msg = await ctx.send(f"Added {member.name} to this channel")
+		del_msg = await ctx.send(f"Added {member.mention} to this channel")
 		await asyncio.sleep(5)
 		await msg.delete()
 
@@ -113,7 +113,7 @@ class ModMail(commands.Cog):
 		overwrite = PermissionOverwrite()
 		overwrite.read_messages = False
 		await ctx.channel.set_permissions(member, overwrite=overwrite)
-		del_msg = await ctx.send(f"Removed {member.name} to this channel")
+		del_msg = await ctx.send(f"Removed {member.mention} to this channel")
 		await asyncio.sleep(5)
 		await msg.delete()
 
