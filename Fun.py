@@ -43,13 +43,13 @@ class Fun(commands.Cog):
 		await ctx.send(f'Question: {question}\nAnswer: {choice(responses)}')
 
 	@commands.command(aliases=['guess','gs'])
-	@commands.has_permissions(manage_server=True)
+	@commands.has_permissions(manage_guild=True)
 	async def random(self, ctx, *, num: int):
 		number = randint(1, num)
 		await ctx.message.delete()
 		await ctx.author.send(f"The the correct number is {number}.\nDo not share this information with others.")
 		await ctx.send(f"**Guess The Number Game has been Started**\nGuess the number between 1 and {num}")
-		guess=0
+		guess = 0
 		while guess != number:
 			try:
 				msg = await client.wait_for(
@@ -67,6 +67,13 @@ class Fun(commands.Cog):
 					await ctx.author.send(f"The Winner of your **Guess The Number** is {message.author.mention}.")
 			except asyncio.TimeoutError:
 				continue
+
+	@random.error
+	async def random_error(self, ctx, error):
+		if isinstance(error, commands.CheckFailure):
+			msg = await ctx.send(f"{ctx.author.mention} You don't have `Manage Server` permission to use this command.")
+		else:
+			msg = await ctx.send(f"{ctx.author.mention} Something went wrong please try again later.")
 
 def setup(client):
 	client.add_cog(Fun(client))
