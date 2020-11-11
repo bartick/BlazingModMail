@@ -63,8 +63,8 @@ class Fun(commands.Cog):
 				except ValueError:
 					continue
 				if guess == number:
-					await ctx.send(f"{message.author.mention} You have have guessed correctly.\nAnd you have won the match.\nThank you for playing.")
-					await ctx.author.send(f"The Winner of your **Guess The Number** is {message.author.mention}.")
+					await ctx.send(f"{msg.author.mention} You have have guessed correctly.\nAnd you have won the match.\nThank you for playing.")
+					await ctx.author.send(f"The Winner of your **Guess The Number** is {msg.author.mention}.")
 					break
 			except asyncio.TimeoutError:
 				continue
