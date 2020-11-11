@@ -87,8 +87,7 @@ class ModMail(commands.Cog):
 
 	@commands.command(aliases=['a','add'])
 	@commands.has_permissions(manage_channels=True)
-	async def add_member(self,ctx, member_id: int):
-		member = await ctx.guild.fetch_member(member_id)
+	async def add_member(self,ctx, member: User):
 		overwrites =  PermissionOverwrite()
 		overwrites.read_messages = True
 		await ctx.channel.set_permissions(member, overwrite=overwrites)
@@ -110,8 +109,7 @@ class ModMail(commands.Cog):
 
 	@commands.command(aliases=['remove','rm'])
 	@commands.has_permissions(manage_channels=True)
-	async def remove_member(self,ctx, member_id: int):
-		member = await ctx.guild.fetch_member(member_id)
+	async def remove_member(self,ctx, member: User):
 		overwrite = PermissionOverwrite()
 		overwrite.read_messages = False
 		await ctx.channel.set_permissions(member, overwrite=overwrite)
