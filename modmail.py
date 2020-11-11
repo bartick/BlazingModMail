@@ -87,13 +87,13 @@ class ModMail(commands.Cog):
 
 	@commands.command(aliases=['a','add'])
 	@commands.has_permissions(manage_channels=True)
-	async def add_member(self,ctx, member: User):
+	async def add_member(self,ctx, user: User):
 		overwrites =  PermissionOverwrite()
 		overwrites.read_messages = True
-		await ctx.channel.set_permissions(member, overwrite=overwrites)
-		# del_msg = await ctx.send(f"Added {member.mention} to this channel")
-		# await asyncio.sleep(5)
-		# await msg.delete()
+		await ctx.channel.set_permissions(user, overwrite=overwrites)
+		del_msg = await ctx.send(f"Added {user.mention} to this channel")
+		await asyncio.sleep(5)
+		await msg.delete()
 
 	@add_member.error
 	async def add_member_error(self, ctx, error):
