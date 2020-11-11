@@ -42,5 +42,31 @@ class Fun(commands.Cog):
                      'You may rely on it.']
 		await ctx.send(f'Question: {question}\nAnswer: {choice(responses)}')
 
+	@commands.command(aliases=['guess','gs'])
+	@commands.has_permissions(manage_server=True)
+	async def random(self, ctx, *, num: int):
+		number = randint(1, num)
+		await ctx.message.delete()
+		await ctx.author.send(f"The the correct number is {number}.\nDo not share this information with others.")
+		await ctx.send(f"**Guess The Number Game has been Started**\nGuess the number between 1 and {num}")
+		guess=0
+		while guess != number:
+			try:
+				msg = await client.wait_for(
+					"message",
+					timeout=100,
+					check=lambda message: message.author != ctx.author
+											and message.channel == ctx.channel
+				)
+				try:
+					guess = int(msg.content)
+				except ValueError:
+					continue
+				if guess == number:
+					await ctx.send(f"{message.author.mention} You have have guessed correctly.\nAnd you have won the match.\nThank you for playing.")
+					await ctx.author.send(f"The Winner of your **Guess The Number** is {message.author.mention}.")
+			except asyncio.TimeoutError:
+				continue
+
 def setup(client):
 	client.add_cog(Fun(client))
