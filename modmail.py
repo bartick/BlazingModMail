@@ -48,6 +48,7 @@ class ModMail(commands.Cog):
 		user = await ctx.guild.fetch_member(user_id)
 		await user.send(f"**You got a dm from {ctx.guild.name} :** {message}")
 		embed = Embed(description=f"<:Success:776003968723451914> Successfully sent a dm to {user.mention}", color=cts.author.color)
+		await ctx.send(embed=embed)
 
 	@commands.command()
 	@commands.has_permissions(manage_channels=True)
