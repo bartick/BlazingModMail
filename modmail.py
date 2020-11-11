@@ -124,7 +124,7 @@ class ModMail(commands.Cog):
 			return
 		if message.author != message.author.bot:
 			if not message.guild:
-				cnl = utils.get(client.get_all_channels(), guild__name=os.getenv('GUILD_NAME'),name=author.name.lower())
+				cnl = utils.get(client.get_all_channels(), guild__name=os.getenv('GUILD_NAME'),name=f"📬〢{author.name.lower()}")
 				if cnl == None:
 					cnl = await create_channel(author)
 					await cnl.send(f"**{author.name}#{author.discriminator} :** {message.content}")
