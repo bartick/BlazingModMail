@@ -44,11 +44,18 @@ class ModMail(commands.Cog):
 		self.client = client
 
 	@commands.command(aliases=['dm'])
-	async def direct_message_user(self, ctx, user_id: int, *,message=None):
-		user = await ctx.guild.fetch_member(user_id)
+	@commands.has_permissions(manage_messages=True)
+	async def direct_message_user(self, ctx, user: User, *,message=None):
 		await user.send(f"**You got a dm from {ctx.guild.name} :** {message}")
 		embed = Embed(description=f"<:Success:776003968723451914> Successfully sent a dm to {user.mention}", color=ctx.author.color)
 		await ctx.send(embed=embed)
+
+	@direct_message_user.error
+	async def direct_message_user_error(self, ctx, error):
+		if isinstance(error, commands.CheckFailure):
+			message = await ctx.send(f"{ctx.author.mention} You do not have enough to use this command.")
+		else:
+			message = await ctx.send(f"{ctx.author.mention} Something went wrong please try again later.")
 
 	@commands.command()
 	@commands.has_permissions(manage_channels=True)
