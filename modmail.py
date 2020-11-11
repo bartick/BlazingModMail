@@ -43,6 +43,12 @@ class ModMail(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
+	@commands.command(aliases=['dm'])
+	async def direct_message_user(self, ctx, user_id: int, *,message=None):
+		user = await ctx.guild.fetch_member(user_id)
+		await user.send(f"**You got a dm from {ctx.guild.name} :** {message}")
+		embed = Embed(description=f"<:Success:776003968723451914> Successfully sent a dm to {user.mention}", color=cts.author.color)
+
 	@commands.command()
 	@commands.has_permissions(manage_channels=True)
 	async def close(self, ctx, channel: TextChannel = None, *, reason=None):
