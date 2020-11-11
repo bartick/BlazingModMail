@@ -40,7 +40,7 @@ class Fun(commands.Cog):
                      'Yes.',
                      'Yes – definitely.',
                      'You may rely on it.']
-        await ctx.send(f'Question: {question}\nAnswer: {choice(responses)}')
+		await ctx.send(f'Question: {question}\nAnswer: {choice(responses)}')
 
 def setup(client):
 	client.add_cog(Fun(client))
