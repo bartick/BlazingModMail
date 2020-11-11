@@ -61,5 +61,6 @@ def is_owner(ctx):
     return ctx.message.author.id == 707876147324518440
 
 client.load_extension('modmail')
+client.load_extension('Fun')
 
 client.run(os.getenv('BOT_TOKEN'))
