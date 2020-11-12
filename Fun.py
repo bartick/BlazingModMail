@@ -72,7 +72,7 @@ class Fun(commands.Cog):
 	@random.error
 	async def random_error(self, ctx, error):
 		if isinstance(error, commands.CheckFailure):
-			msg = await ctx.send(f"{ctx.author.mention} You don't have `Manage Server` permission to use this command.")
+			msg = await ctx.send(f"{ctx.author.mention} You don't have `Manage Messages` permission to use this command.")
 		else:
 			msg = await ctx.send(f"{ctx.author.mention} Something went wrong please try again later.")
 
