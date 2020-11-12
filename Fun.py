@@ -43,7 +43,7 @@ class Fun(commands.Cog):
 		await ctx.send(f'Question: {question}\nAnswer: {choice(responses)}')
 
 	@commands.command(aliases=['guess','gs'])
-	@commands.has_permissions(manage_guild=True)
+	@commands.has_permissions(manage_messages=True)
 	async def random(self, ctx, *, num: int):
 		number = randint(1, num)
 		await ctx.message.delete()
