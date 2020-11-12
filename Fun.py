@@ -98,6 +98,7 @@ class Fun(commands.Cog):
 			embed.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
 			embed.thumbnail(url=client.avatar_url)
 			embed.set_image(url=anime.image_url)
+			await ctx.send(embed=embed)
 
 	'''@anime.error
 	async def anime_error(self, ctx, error):
