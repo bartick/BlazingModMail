@@ -1,10 +1,20 @@
 import asyncio
 from random import *
+from mal import Anime, AnimeSearch
 
 import discord
 from discord.ext import commands
 
 from run import client
+
+def search_sort(s):
+	temp=""
+	for i in s:
+		if i == " ":
+			temp=temp + "+"
+		else:
+			temp = temp + i
+	return temp
 
 class Fun(commands.Cog):
 
@@ -75,6 +85,25 @@ class Fun(commands.Cog):
 			msg = await ctx.send(f"{ctx.author.mention} You don't have `Manage Messages` permission to use this command.")
 		else:
 			msg = await ctx.send(f"{ctx.author.mention} Something went wrong please try again later.")
+		await asyncio.sleep(5)
+		await msg.delete()
+
+	@commands.command()
+	async def anime(self, ctx, *,name=""):
+		if name == "":
+			ctx.send(f"{ctx.author.mention} you need to provide a name to search.")
+			search = AnimeSearch(name)
+			anime = Anime(search.results[0].mal_id)
+			embed = Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color)
+			embed.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
+			embed.thumbnail(url=client.avatar_url)
+			embed.set_image(url=anime.image_url)
+
+	'''@anime.error
+	async def anime_error(self, ctx, error):
+		msg = ctx.send(f"{ctx.author.mention} Something went wrong please make sure the anime you are searching is actually the name of an anime.")
+		await asyncio.sleep(5)
+		await msg.delete()'''
 
 def setup(client):
 	client.add_cog(Fun(client))
