@@ -91,7 +91,8 @@ class Fun(commands.Cog):
 	@commands.command()
 	async def anime(self, ctx, *,name=""):
 		if name == "":
-			ctx.send(f"{ctx.author.mention} you need to provide a name to search.")
+			await ctx.send(f"{ctx.author.mention} you need to provide a name to search.")
+		else:
 			search = AnimeSearch(name)
 			anime = Anime(search.results[0].mal_id)
 			embed = Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color)
