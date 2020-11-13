@@ -94,7 +94,7 @@ class Fun(commands.Cog):
 		if name == "":
 			await ctx.send(f"{ctx.author.mention} you need to provide a name to search.")
 		else:
-			await client.send_typing(ctx.channel)
+			await client.typing()
 			search = AnimeSearch(name)
 			anime = Anime(search.results[0].mal_id)
 			result = discord.Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color, timestamp=datetime.datetime.now().strftime("%H:%M:%S"))
