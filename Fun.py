@@ -104,11 +104,11 @@ class Fun(commands.Cog):
 				result.timestamp = datetime.datetime.now()
 				await ctx.send(embed=result)
 
-	'''@anime.error
+	@anime.error
 	async def anime_error(self, ctx, error):
 		msg = ctx.send(f"{ctx.author.mention} Something went wrong please make sure the anime you are searching is actually the name of an anime.")
 		await asyncio.sleep(5)
-		await msg.delete()'''
+		await msg.delete()
 
 def setup(client):
 	client.add_cog(Fun(client))
