@@ -94,14 +94,14 @@ class Fun(commands.Cog):
 		if name == "":
 			await ctx.send(f"{ctx.author.mention} you need to provide a name to search.")
 		else:
-			await client.trigger_typing()
-			search = AnimeSearch(name)
-			anime = Anime(search.results[0].mal_id)
-			result = discord.Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color, timestamp=datetime.datetime.now().strftime("%H:%M:%S"))
-			result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-			result.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
-			result.set_thumbnail(url=anime.image_url)
-			await ctx.send(embed=result)
+			async with ctx.typing():
+				search = AnimeSearch(name)
+				anime = Anime(search.results[0].mal_id)
+				result = discord.Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color, timestamp=datetime.datetime.now().strftime("%H:%M:%S"))
+				result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+				result.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
+				result.set_thumbnail(url=anime.image_url)
+				await ctx.send(embed=result)
 
 	'''@anime.error
 	async def anime_error(self, ctx, error):
