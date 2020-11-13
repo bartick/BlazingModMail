@@ -88,17 +88,17 @@ class Fun(commands.Cog):
 		await asyncio.sleep(5)
 		await msg.delete()
 
-	'''@commands.command()
+	@commands.command()
 	async def anime(self, ctx, *,name=""):
 		if name == "":
 			await ctx.send(f"{ctx.author.mention} you need to provide a name to search.")
 		else:
 			search = AnimeSearch(name)
 			anime = Anime(search.results[0].mal_id)
-			embed = discord.Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color)
-			embed.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
-			embed.thumbnail(url=anime.image_url)
-			await ctx.send(embed=embed)'''
+			result = discord.Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color)
+			result.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
+			result.thumbnail(url=anime.image_url)
+			await ctx.send(embed=result)
 
 	'''@anime.error
 	async def anime_error(self, ctx, error):
