@@ -118,7 +118,7 @@ class Fun(commands.Cog):
 		picture.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 		picture.set_image(url=profile.avatar_url)
 		picture.timestamp = datetime.datetime.now()
-		await ctx.send(embed=result)
+		await ctx.send(embed=picture)
 
 def setup(client):
 	client.add_cog(Fun(client))
