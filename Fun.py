@@ -110,5 +110,15 @@ class Fun(commands.Cog):
 		await asyncio.sleep(5)
 		await msg.delete()
 
+	@commands.command(aliases=['av','avatar','pfp'])
+	async def profile_picture(self, ctx, profile: discord.User=None):
+		if profile == None:
+			profile = ctx.author
+		picture = discord.Embed(color=ctx.author.color)
+		picture.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+		picture.set_image(profile.avatar_url)
+		picture.timestamp = datetime.datetime.now()
+		await ctx.send(embed=result)
+
 def setup(client):
 	client.add_cog(Fun(client))
