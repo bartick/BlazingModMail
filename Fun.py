@@ -116,7 +116,7 @@ class Fun(commands.Cog):
 			profile = ctx.author
 		picture = discord.Embed(color=ctx.author.color)
 		picture.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-		picture.set_image(profile.avatar_url)
+		picture.set_image(url=profile.avatar_url)
 		picture.timestamp = datetime.datetime.now()
 		await ctx.send(embed=result)
 
