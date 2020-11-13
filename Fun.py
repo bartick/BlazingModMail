@@ -101,7 +101,7 @@ class Fun(commands.Cog):
 				result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 				result.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
 				result.set_thumbnail(url=anime.image_url)
-				result.timestamp = datetime.datetime.now().strftime("%H:%M:%S")
+				result.timestamp = datetime.datetime.now()
 				await ctx.send(embed=result)
 
 	'''@anime.error
