@@ -97,7 +97,7 @@ class Fun(commands.Cog):
 			anime = Anime(search.results[0].mal_id)
 			result = discord.Embed(title=anime.title, description=f"Description\n{anime.synopsis}", color=ctx.author.color)
 			result.add_field(name="Information",value=f"**English Title:** {anime.title_english}\n**Japanese Title:** {anime.title_japanese}\n**Total Episode:** {anime.episodes}\n**Type:** {anime.type}\n**Type:** {anime.type}\n**Status:** {anime.status}\n**Genres:** {anime.genres}\n**Duration:** {anime.duration}\n**Rating:** {anime.rating}\n**Rank:** {anime.rank}",inline=False)
-			result.thumbnail(url=anime.image_url)
+			result.set_thumbnail(url=anime.image_url)
 			await ctx.send(embed=result)
 
 	'''@anime.error
