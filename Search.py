@@ -61,7 +61,7 @@ class Search(commands.Cog):
 			await msg.delete()
 		else:
 			async with ctx.typing():
-				answer = wikipedia.WikipediaPage(question)
+				answer = wikipedia.WikipediaPage(search)
 				result = discord.Embed(title=answer.title,description=answer.summary,color=ctx.author.color)
 				result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 				result.set_thumbnail(url=client.user.avatar_url)
