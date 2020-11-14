@@ -60,7 +60,15 @@ class Search(commands.Cog):
 			await asyncio.sleep(5)
 			await msg.delete()
 		else:
-			try:
+			async with ctx.typing():
+				answer = wikipedia.WikipediaPage(question)
+				result = discord.Embed(title=answer.title,description=answer.summary,color=ctx.author.color)
+				result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+				result.set_thumbnail(url=client.user.avatar_url)
+				result.set_image(url=answer.images[0])
+				result.timestamp = datetime.datetime.now()
+				await ctx.send(embed=result)
+			'''try:
 				async with ctx.typing():
 					answer = wikipedia.WikipediaPage(question)
 					result = discord.Embed(title=answer.title,description=answer.summary,color=ctx.author.color)
@@ -72,7 +80,7 @@ class Search(commands.Cog):
 			except Exception:
 				msg = await ctx.send(f"{ctx.author.mention} something went wrong please try again later.")
 				await asyncio.sleep(5)
-				await msg.delete()
+				await msg.delete()'''
 
 def setup(client):
 	client.add_cog(Search(client))
