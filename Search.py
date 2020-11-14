@@ -1,5 +1,7 @@
 from mal import Anime, AnimeSearch
+import wikipedia
 import datetime
+import asyncio
 
 import discord
 from discord.ext import commands
@@ -50,6 +52,27 @@ class Search(commands.Cog):
 		picture.set_image(url=profile.avatar_url)
 		picture.timestamp = datetime.datetime.now()
 		await ctx.send(embed=picture)
+
+	@commands.command(aliases=['wiki'])
+	async def wikipedia_search(self, ctx, *,search=""):
+		if search == "":
+			msg = ctx.send(f"{ctx.author.mention} you need to provide a search query.")
+			await asyncio.sleep(5)
+			await msg.delete()
+		else:
+			try:
+				async with ctx.typing():
+					answer = wikipedia.WikipediaPage(question)
+					result = discord.Embed(title=answer.title,description=answer.summary,color=ctx.author.color)
+					result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+					result.set_thumbnail(url=client.user.avatar_url)
+					result.set_image(url=answer.images[0])
+					result.timestamp = datetime.datetime.now()
+					await ctx.send(embed=result)
+			except Exception:
+				msg = await ctx.send(f"{ctx.author.mention} something went wrong please try again later.")
+				await asyncio.sleep(5)
+				await msg.delete()
 
 def setup(client):
 	client.add_cog(Search(client))
