@@ -71,7 +71,7 @@ class Search(commands.Cog):
 					await ctx.send(embed=result)
 			except Exception as e:
 				async with ctx.typing():
-					error = discord.Embed(title="A Random Error Occured",description=e,color=ctx.author.color)
+					error = discord.Embed(title="A Random Error Occured",description=str(e),color=ctx.author.color)
 					error.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 					error.set_thumbnail(url=client.user.avatar_url)
 					error.timestamp = datetime.datetime.now()
