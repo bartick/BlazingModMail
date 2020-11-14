@@ -60,27 +60,22 @@ class Search(commands.Cog):
 			await asyncio.sleep(5)
 			await msg.delete()
 		else:
-			async with ctx.typing():
-				answer = wikipedia.WikipediaPage(search)[0]
-				result = discord.Embed(title=answer.title,description=answer.summary,color=ctx.author.color)
-				result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-				result.set_thumbnail(url=client.user.avatar_url)
-				result.set_image(url=answer.images[0])
-				result.timestamp = datetime.datetime.now()
-				await ctx.send(embed=result)
-			'''try:
+			try:
 				async with ctx.typing():
-					answer = wikipedia.WikipediaPage(question)
+					answer = wikipedia.WikipediaPage(search)
 					result = discord.Embed(title=answer.title,description=answer.summary,color=ctx.author.color)
 					result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 					result.set_thumbnail(url=client.user.avatar_url)
 					result.set_image(url=answer.images[0])
 					result.timestamp = datetime.datetime.now()
 					await ctx.send(embed=result)
-			except Exception:
-				msg = await ctx.send(f"{ctx.author.mention} something went wrong please try again later.")
-				await asyncio.sleep(5)
-				await msg.delete()'''
+			except Exception as e:
+				async with ctx.typing():
+					error = discord.Embed(title="A Random Error Occured",description=e,color=ctx.author.color)
+					error.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+					error.set_thumbnail(url=client.user.avatar_url)
+					result.timestamp = datetime.datetime.now()
+					await ctx.send(embed=error)
 
 def setup(client):
 	client.add_cog(Search(client))
