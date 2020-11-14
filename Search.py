@@ -11,7 +11,7 @@ from run import client
 def summery_sort(text):
 	if len(text) > 2048:
 		text = text[:2048]
-		text = text[:max(text.rindex('.'), text.rindex('?'), text.rindex('!'))] 
+		text = text[:text.rindex('.')] 
 	return text
 
 def search_sort(s):
@@ -67,12 +67,14 @@ class Search(commands.Cog):
 			await msg.delete()
 		else:
 			try:
+				wikipedia.set_lang('en')
 				async with ctx.typing():
 					answer = wikipedia.WikipediaPage(search)
 					result = discord.Embed(title=answer.title,description=summery_sort(answer.summary),color=ctx.author.color)
 					result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 					result.set_thumbnail(url=client.user.avatar_url)
 					result.set_image(url=answer.images[0])
+					result.set_footer(text="The max amount of data the can be sent to discord is 2048. So there might me extra data at Wikipedia")
 					result.timestamp = datetime.datetime.now()
 					await ctx.send(embed=result)
 			except Exception as e:
