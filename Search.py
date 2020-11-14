@@ -8,6 +8,12 @@ from discord.ext import commands
 
 from run import client
 
+def summery_sort(text):
+	if len(text) > 2048:
+		text = text[:2048]
+		text = text[:max(text.rindex('.'), text.rindex('?'), text.rindex('!'))] 
+	return text
+
 def search_sort(s):
 	temp=""
 	for i in s:
@@ -63,7 +69,7 @@ class Search(commands.Cog):
 			try:
 				async with ctx.typing():
 					answer = wikipedia.WikipediaPage(search)
-					result = discord.Embed(title=answer.title,description=answer.summary,color=ctx.author.color)
+					result = discord.Embed(title=answer.title,description=summery_sort(answer.summary),color=ctx.author.color)
 					result.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 					result.set_thumbnail(url=client.user.avatar_url)
 					result.set_image(url=answer.images[0])
