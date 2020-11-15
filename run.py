@@ -63,5 +63,6 @@ def is_owner(ctx):
 client.load_extension('modmail')
 client.load_extension('Fun')
 client.load_extension('Search')
+client.load_extension('Help')
 
 client.run(os.getenv('BOT_TOKEN'))
