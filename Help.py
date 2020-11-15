@@ -10,7 +10,7 @@ class Help(commands.Cog):
 		self.client = client
 
 	@commands.command(aliases=['help'])
-	def help_command(self, ctx):
+	async def help_command(self, ctx):
 		hel = discord.Embed(title=f"Help for {client.user.name}", description="All Commands are listed below", color=ctx.author.color)
 		hel.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 		hel.add_field(name="ModMail",value="dm\nclose\nsend\na or add\nremove or rn",inline=True)
