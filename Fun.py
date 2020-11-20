@@ -121,10 +121,19 @@ class Fun(commands.Cog):
 			card_exp = [300,600,900,100,200,300]
 			cards_amt = discord.Embed(title="AMOUNT OF CARDS NEEDED :",color=ctx.author.color)
 			cards_amt.set_author(name="ENHANCEMENT",icon_url=client.user.avatar_url)
-			cards_amt.add_field(name="**Cards with same name (3x multiplier) :**\n",value=f"\n**Number of __Common__ cards :**\n**❯ {calculate_cards(e,card_exp[0])}** cards\n\n**Number of __Uncommon__ cards :**\n**❯ {calculate_cards(e,card_exp[1])}** cards\n\n**Number of __Rare__ cards :**\n**❯ {calculate_cards(e,card_exp[2])}** cards",inline=False)
-			cards_amt.add_field(name="**────────────────────**\n**Cards with different name :**\n",value=f"\n**Number of __Common__ cards :**\n**❯ {calculate_cards(e,card_exp[3])}** cards\n\n**Number of __Uncommon__ cards :**\n**❯ {calculate_cards(e,card_exp[4])}** cards\n\n**Number of __Rare__ cards :**\n**❯ {calculate_cards(e,card_exp[5])}** cards",inline=False)
+			cards_amt.add_field(name="**Cards with same name (3x multiplier) :**",inline=False)
+			cards_amt.add_field(value=f"**Number of __Common__ cards :**\n**❯ {calculate_cards(e,card_exp[0])}** cards\n\n**Number of __Uncommon__ cards :**\n**❯ {calculate_cards(e,card_exp[1])}** cards\n\n**Number of __Rare__ cards :**\n**❯ {calculate_cards(e,card_exp[2])}** cards",inline=False)
+			cards_amt.add_field(name="**────────────────────**\n**Cards with different name :**",inline=False)
+			cards_amt.add_field(value=f"**Number of __Common__ cards :**\n**❯ {calculate_cards(e,card_exp[3])}** cards\n\n**Number of __Uncommon__ cards :**\n**❯ {calculate_cards(e,card_exp[4])}** cards\n\n**Number of __Rare__ cards :**\n**❯ {calculate_cards(e,card_exp[5])}** cards",inline=False)
 			cards_amt.set_footer(text=f"Total Exp: {e} Exp")
 			await ctx.send(content=f"{ctx.author.mention}",embed=cards_amt)
+
+	@commands.command()
+	async def math(self, ctx, *,expression=""):
+		try:
+			await ctx.send(f"**The answer of your expression is:** {eval(expression)}")
+		except Exception:
+			await ctx.send("Please provide a valid expression.")
 
 def setup(client):
 	client.add_cog(Fun(client))
