@@ -97,9 +97,8 @@ class Fun(commands.Cog):
 			await ctx.send(f"{ctx.author.mention} Please provide a valid level.")
 		else:
 			req=get_data_database_exp(l1+1,l2)
-			expreq = discord.Embed(title="**The amount of exp you need to enhance the cards from:**",value=f"Level **{l1}** to Level **{l2}**: **{req}** Exp",color=ctx.author.color)
+			expreq = discord.Embed(title="The amount of exp you need to enhance the cards from:",description=f"Level **{l1}** to Level **{l2}**: **{req}** Exp",color=ctx.author.color)
 			expreq.set_author(name="ENHANCEMENT",icon_url=client.user.avatar_url)
-			# expreq.add_field(name="**The amount of exp you need to enhance the cards from:**",value=f"Level **{l1}** to Level **{l2}**: **{req}** Exp",inline=False)
 			expreq.set_footer(text=f"Total Exp: {req} Exp")
 			await ctx.send(content=f"{ctx.author.mention}",embed=expreq)
 
