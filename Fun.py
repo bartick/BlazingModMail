@@ -1,11 +1,23 @@
 import asyncio
 from random import *
+import sqlite3
 
 import discord
 from discord.ext import commands
 import datetime
 
 from run import client
+
+def get_data_database_exp(a,b):
+	conn = sqlite3.connect('Main_Database.db')
+	cursor = conn.cursor()
+	sum=0
+	cursor.execute('SELECT Exp FROM Expcards WHERE Level Between ? AND ?',(a,b))
+	for i in cursor.fetchall():
+		sum = sum+i[0]
+	cursor.close()
+	conn.close()
+	return sum
 
 class Fun(commands.Cog):
 
@@ -78,6 +90,18 @@ class Fun(commands.Cog):
 			msg = await ctx.send(f"{ctx.author.mention} Something went wrong please try again later.")
 		await asyncio.sleep(5)
 		await msg.delete()
+
+	@commands.command(aliases=[exp])
+	async def experience(self, ctx, l1: int=0, l2: int=0):
+		if l1 >= l2 || l1 >= 60 || l1 < 1 || l2 > 60 || l2 < 2:
+			await ctx.send(f"{ctx.author.mention} Please provide a valid level.")
+		else:
+			req=get_data_database_exp(l1+1,l2)
+			expreq = discord.Embed()
+			expreq.set_author(name="ENHANCEMENT",icon_url=client.user.avatar_url)
+			expreq.add_field(name="The amount of exp you need to enhance the cards from:",value=f"Level **{l1}** to Level **{l2}**: **{req}** Exp",inline=False)
+			expreq.set_footer(text=f"Total Exp: {req} Exp")
+			await ctx.send(embed=expreq)
 
 def setup(client):
 	client.add_cog(Fun(client))
