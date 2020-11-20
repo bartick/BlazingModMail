@@ -8,6 +8,17 @@ import datetime
 
 from run import client
 
+def calculate_cards(exp, cardexp):
+	sum=0
+	i=0
+	while True:
+		if sum < exp:
+			sum=sum+cardexp
+			i+=1
+		else:
+			break
+	return i
+
 def get_data_database_exp(a,b):
 	conn = sqlite3.connect('Main_Database.db')
 	cursor = conn.cursor()
@@ -101,6 +112,19 @@ class Fun(commands.Cog):
 			expreq.set_author(name="ENHANCEMENT",icon_url=client.user.avatar_url)
 			expreq.set_footer(text=f"Total Exp: {req} Exp")
 			await ctx.send(content=f"{ctx.author.mention}",embed=expreq)
+
+	@commands.command(aliases=['expcards'])
+	async def experience_cards(self, ctx, e: int=0):
+		if e <= 0:
+			await ctx.send(f"{ctx.author.mention} Please provid a valid experience level.")
+		else:
+			card_exp = [900,600,300,100,200,300]
+			cards_amt = discord.Embed(title="AMOUNT OF CARDS NEEDED :",color=ctx.author.color)
+			cards_amt.set_author(name="ENHANCEMENT",icon_url=client.user.avatar_url)
+			cards_amt.add_field(name="Cards with same name (3x multiplier) :",value=f"Number of __Common__ cards :\n❯{calculate_cards(e,card_exp[0])} cards\n\nNumber of __Uncommon__ cards :\n❯{calculate_cards(e,card_exp[1])} cards\n\nNumber of __Rare__ cards :\n❯{calculate_cards(e,card_exp[2])} cards",inline=False)
+			cards_amt.add_field(name="────────────────────\nCards with different name :",value=f"Number of __Common__ cards :\n❯{calculate_cards(e,card_exp[3])} cards\n\nNumber of __Uncommon__ cards :\n❯{calculate_cards(e,card_exp[4])} cards\n\nNumber of __Rare__ cards :\n❯{calculate_cards(e,card_exp[5])} cards",inline=False)
+			cards_amt.set_footer(text=f"Total Exp: {e} Exp")
+			await ctx.send(content=f"{ctx.author.mention}",embed=cards_amt)
 
 def setup(client):
 	client.add_cog(Fun(client))
