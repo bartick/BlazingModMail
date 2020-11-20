@@ -91,7 +91,7 @@ class Fun(commands.Cog):
 		await asyncio.sleep(5)
 		await msg.delete()
 
-	@commands.command(aliases=[exp])
+	@commands.command(aliases=['exp'])
 	async def experience(self, ctx, l1: int=0, l2: int=0):
 		if l1 >= l2 or l1 >= 60 or l1 < 1 or l2 > 60 or l2 < 2:
 			await ctx.send(f"{ctx.author.mention} Please provide a valid level.")
