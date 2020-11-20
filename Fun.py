@@ -118,11 +118,11 @@ class Fun(commands.Cog):
 		if e <= 0:
 			await ctx.send(f"{ctx.author.mention} Please provid a valid experience level.")
 		else:
-			card_exp = [900,600,300,100,200,300]
+			card_exp = [300,600,900,100,200,300]
 			cards_amt = discord.Embed(title="AMOUNT OF CARDS NEEDED :",color=ctx.author.color)
 			cards_amt.set_author(name="ENHANCEMENT",icon_url=client.user.avatar_url)
-			cards_amt.add_field(name="Cards with same name (3x multiplier) :",value=f"Number of __Common__ cards :\n❯{calculate_cards(e,card_exp[0])} cards\n\nNumber of __Uncommon__ cards :\n❯{calculate_cards(e,card_exp[1])} cards\n\nNumber of __Rare__ cards :\n❯{calculate_cards(e,card_exp[2])} cards",inline=False)
-			cards_amt.add_field(name="────────────────────\nCards with different name :",value=f"Number of __Common__ cards :\n❯{calculate_cards(e,card_exp[3])} cards\n\nNumber of __Uncommon__ cards :\n❯{calculate_cards(e,card_exp[4])} cards\n\nNumber of __Rare__ cards :\n❯{calculate_cards(e,card_exp[5])} cards",inline=False)
+			cards_amt.add_field(name="**Cards with same name (3x multiplier) :**\n",value=f"**Number of __Common__ cards :**\n**❯ {calculate_cards(e,card_exp[0])}** cards\n\n**Number of __Uncommon__ cards :**\n**❯ {calculate_cards(e,card_exp[1])}** cards\n\n**Number of __Rare__ cards :**\n**❯ {calculate_cards(e,card_exp[2])}** cards",inline=False)
+			cards_amt.add_field(name="**────────────────────**\n**Cards with different name :**\n",value=f"**Number of __Common__ cards :**\n**❯ {calculate_cards(e,card_exp[3])}** cards\n\n**Number of __Uncommon__ cards :**\n**❯ {calculate_cards(e,card_exp[4])}** cards\n\n**Number of __Rare__ cards :**\n**❯ {calculate_cards(e,card_exp[5])}** cards",inline=False)
 			cards_amt.set_footer(text=f"Total Exp: {e} Exp")
 			await ctx.send(content=f"{ctx.author.mention}",embed=cards_amt)
 
