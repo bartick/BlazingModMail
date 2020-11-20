@@ -93,7 +93,7 @@ class Fun(commands.Cog):
 
 	@commands.command(aliases=[exp])
 	async def experience(self, ctx, l1: int=0, l2: int=0):
-		if l1 >= l2 || l1 >= 60 || l1 < 1 || l2 > 60 || l2 < 2:
+		if l1 >= l2 or l1 >= 60 or l1 < 1 or l2 > 60 or l2 < 2:
 			await ctx.send(f"{ctx.author.mention} Please provide a valid level.")
 		else:
 			req=get_data_database_exp(l1+1,l2)
