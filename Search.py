@@ -50,7 +50,7 @@ class Search(commands.Cog):
 		await msg.delete()
 
 	@commands.command(aliases=['av','avatar','pfp'])
-	async def profile_picture(self, ctx, profile: typing.Optional[discord.Member]=None):
+	async def profile_picture(self, ctx, profile: discord.Member=None):
 		if profile == None:
 			profile = ctx.author
 		picture = discord.Embed(color=ctx.author.color)
