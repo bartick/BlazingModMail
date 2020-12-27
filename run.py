@@ -11,7 +11,9 @@ def get_prefix(client, message):
     return prefixes
 
 
-client = commands.Bot(command_prefix=get_prefix,case_insensitive=True)
+intents = discord.Intents.all()
+
+client = commands.AutoShardedBot(command_prefix=get_prefix, intents=intents, case_insensitive=True)
 client.remove_command('help')
 
 status = cycle(['My Prefix is b.', 'Originally I was developed by Bartick',
